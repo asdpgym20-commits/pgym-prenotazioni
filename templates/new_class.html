@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Nuova lezione</h1>
+<form method="post" class="row g-3">
+  <div class="col-md-6">
+    <label class="form-label">Titolo</label>
+    <input class="form-control" name="title" required>
+  </div>
+  <div class="col-md-6">
+    <label class="form-label">Coach</label>
+    <input class="form-control" name="coach">
+  </div>
+  <div class="col-md-4">
+    <label class="form-label">Data</label>
+    <input type="date" class="form-control" name="date" required>
+  </div>
+  <div class="col-md-4">
+    <label class="form-label">Inizio</label>
+    <input type="time" class="form-control" name="start_time" required>
+  </div>
+  <div class="col-md-4">
+    <label class="form-label">Fine</label>
+    <input type="time" class="form-control" name="end_time" required>
+  </div>
+  <div class="col-md-4">
+    <label class="form-label">Capienza</label>
+    <input type="number" class="form-control" name="capacity" value="2" min="1" required>
+  </div>
+  <div class="col-md-8">
+    <label class="form-label">Luogo</label>
+    <input class="form-control" name="location">
+  </div>
+  <div class="col-12">
+    <button class="btn btn-primary">Crea</button>
+    <a class="btn btn-outline-secondary" href="{{ url_for('admin') }}">Annulla</a>
+  </div>
+</form>
+{% endblock %}

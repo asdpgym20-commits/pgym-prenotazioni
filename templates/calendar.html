@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Calendario settimanale</h1>
+<p class="text-muted">{{ start.strftime('%d/%m/%Y') }} — {{ end.strftime('%d/%m/%Y') }}</p>
+<div class="row">
+  {% for day, items in days.items() %}
+    <div class="col-md-4 col-lg-3 mb-3">
+      <div class="border rounded p-2 h-100">
+        <h6>{{ day.strftime('%A %d/%m') }}</h6>
+        {% if not items %}
+          <div class="text-muted">Nessuna lezione</div>
+        {% else %}
+          <ul class="list-unstyled">
+            {% for s in items %}
+              <li class="mb-2">
+                <a href="{{ url_for('class_detail', class_id=s.id) }}">
+                  <strong>{{ s.start_time.strftime('%H:%M') }}</strong> — {{ s.title }}
+                  <small class="text-muted">({{ (s.capacity - s.bookings|length) }} liberi)</small>
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </div>
+    </div>
+  {% endfor %}
+</div>
+{% endblock %}

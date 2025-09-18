@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h1>Area Admin</h1>
+  <div class="d-flex gap-2">
+    <a class="btn btn-primary" href="{{ url_for('new_class') }}">Nuova Lezione</a>
+    <a class="btn btn-outline-primary" href="{{ url_for('new_member') }}">Nuovo Membro</a>
+    <a class="btn btn-outline-primary" href="{{ url_for('personal_settings') }}">Impostazioni Personal</a>
+  </div>
+</div>
+
+<h5>Lezioni settimana corrente</h5>
+{% if not sessions %}
+  <p>Nessuna lezione futura.</p>
+{% else %}
+<table class="table">
+  <thead><tr><th>Data</th><th>Orario</th><th>Titolo</th><th>Coach</th><th>Capienza</th><th></th></tr></thead>
+  <tbody>
+  {% for s in sessions %}
+    <tr>
+      <td>{{ s.date.strftime('%d/%m/%Y') }}</td>
+      <td>{{ s.start_time.strftime('%H:%M') }}–{{ s.end_time.strftime('%H:%M') }}</td>
+      <td><a href="{{ url_for('class_detail', class_id=s.id) }}">{{ s.title }}</a></td>
+      <td>{{ s.coach or '-' }}</td>
+      <td>{{ s.capacity }}</td>
+      <td>
+        <form method="post" action="{{ url_for('delete_class', class_id=s.id) }}" onsubmit="return confirm('Eliminare la lezione?');">
+          <button class="btn btn-sm btn-outline-danger">Elimina</button>
+        </form>
+      </td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endif %}
+{% endblock %}
