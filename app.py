@@ -201,7 +201,28 @@ def index():
 
 @app.route("/calendar")
 def calendar_view():
-    return redirect(url_for("index"))
+    # prendi parametro GET week (YYYY-MM-DD), altrimenti oggi
+    week_str = request.args.get("week")
+    if week_str:
+        ref_date = datetime.strptime(week_str, "%Y-%m-%d").date()
+    else:
+        ref_date = date.today()
+    start = ref_date - timedelta(days=ref_date.weekday())
+    end = start + timedelta(days=6)
+
+    sessions = ClassSession.query.filter(ClassSession.date>=start, ClassSession.date<=end)\
+        .order_by(ClassSession.date, ClassSession.start_time).all()
+
+    days = { (start + timedelta(days=i)): [] for i in range(7) }
+    for s in sessions:
+        days[s.date].append(s)
+
+    prev_week = (start - timedelta(days=7)).strftime("%Y-%m-%d")
+    next_week = (start + timedelta(days=7)).strftime("%Y-%m-%d")
+
+    return render_template("calendar.html", days=days, start=start, end=end,
+                           prev_week=prev_week, next_week=next_week, brand=BRAND_NAME)
+
 
 @app.route("/register", methods=["GET","POST"])
 def register():
