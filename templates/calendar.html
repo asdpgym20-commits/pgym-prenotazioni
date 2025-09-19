@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="text-center mb-4">
+  <img src="/static/logo.png" alt="{{ brand }}" style="max-width:220px; height:auto;">
+</div>
+
+<h2 class="text-center mb-3">Calendario settimanale</h2>
+<p class="text-center text-muted">{{ start.strftime('%d/%m/%Y') }} — {{ end.strftime('%d/%m/%Y') }}</p>
+
+<div class="d-flex justify-content-between mb-3">
+  <a class="btn btn-outline-primary" href="{{ url_for('calendar_view', week=prev_week) }}">« Settimana precedente</a>
+  <a class="btn btn-outline-primary" href="{{ url_for('calendar_view', week=next_week) }}">Settimana successiva »</a>
+</div>
+
+<div class="row">
+{% for day, items in days.items() %}
+  <div class="col-md-3 mb-3">
+    <div class="border rounded p-2 h-100">
+      <h6>{{ day.strftime('%A %d/%m') }}</h6>
+      {% if not items %}
+        <div class="text-muted">Nessuna lezione</div>
+      {% else %}
+        <ul class="list-unstyled small mb-0">
+        {% for s in items %}
+          <li>
+            {{ s.start_time.strftime('%H:%M') }} — {{ s.title }}
+            {% if s.id != -1 %}
+              <a href="{{ url_for('book', class_id=s.id) }}" class="btn btn-sm btn-outline-primary">Prenota</a>
+            {% endif %}
+          </li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+  </div>
+{% endfor %}
+</div>
+{% endblock %}
