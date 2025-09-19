@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Registrazione Cliente</h1>
+<form method="post" class="row g-3" style="max-width:520px;">
+  <div class="col-12">
+    <label class="form-label">Nome e Cognome</label>
+    <input class="form-control" name="name" required>
+  </div>
+  <div class="col-12">
+    <label class="form-label">Email (consigliata)</label>
+    <input type="email" class="form-control" name="email">
+  </div>
+  <div class="col-12">
+    <label class="form-label">Telefono (+39...)</label>
+    <input class="form-control" name="phone" placeholder="+39...">
+  </div>
+  <div class="col-12">
+    <button class="btn btn-primary">Registrati</button>
+  </div>
+</form>
+{% endblock %}

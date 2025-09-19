@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Link generato</h1>
+<p class="mb-3">Se hai inserito il numero, ti abbiamo inviato il link via WhatsApp. In alternativa lo trovi qui sotto:</p>
+<div class="alert alert-success">
+  <code style="word-break: break-all;">{{ link }}</code>
+</div>
+<p class="text-muted">Il link scade tra {{ ttl }} minuti.</p>
+{% endblock %}

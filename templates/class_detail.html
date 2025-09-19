@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ cs.title }}</h1>
+<p class="mb-1"><strong>Data:</strong> {{ cs.date.strftime('%d/%m/%Y') }}</p>
+<p class="mb-1"><strong>Orario:</strong> {{ cs.start_time.strftime('%H:%M') }}–{{ cs.end_time.strftime('%H:%M') }}</p>
+<p class="mb-3"><strong>Coach:</strong> {{ cs.coach or '-' }} • <strong>Luogo:</strong> {{ cs.location or '-' }}</p>
+<p><strong>Capienza:</strong> {{ cs.capacity }} • <strong>Posti liberi:</strong> {{ cs.capacity - cs.bookings|length }}</p>
+
+<a class="btn btn-primary" href="{{ url_for('book', class_id=cs.id) }}">Prenota</a>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Prenota: {{ cs.title }}</h1>
+<p><strong>Quando:</strong> {{ cs.date.strftime('%d/%m/%Y') }} • {{ cs.start_time.strftime('%H:%M') }}–{{ cs.end_time.strftime('%H:%M') }}</p>
+<p><strong>Posti disponibili:</strong> {{ cs.capacity - cs.bookings|length }} / {{ cs.capacity }}</p>
+<form method="post" class="row g-3">
+  <div class="col-md-6">
+    <label class="form-label">Nome</label>
+    <input class="form-control" name="name" required>
+  </div>
+  <div class="col-md-6">
+    <label class="form-label">Email</label>
+    <input type="email" class="form-control" name="email">
+  </div>
+  <div class="col-md-6">
+    <label class="form-label">Telefono (+39...)</label>
+    <input class="form-control" name="phone" placeholder="+39...">
+  </div>
+  <div class="col-12">
+    <button class="btn btn-primary">Conferma prenotazione</button>
+  </div>
+</form>
+{% endblock %}

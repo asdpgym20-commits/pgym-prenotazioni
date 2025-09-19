@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Login cliente (link magico)</h1>
+<p class="text-muted">Inserisci email (consigliata) o telefono in formato +39…</p>
+<form method="post" class="row g-3" style="max-width:520px;">
+  <div class="col-12">
+    <label class="form-label">Email</label>
+    <input type="email" class="form-control" name="email" placeholder="es. nome@email.it">
+  </div>
+  <div class="col-12">
+    <label class="form-label">Telefono</label>
+    <input class="form-control" name="phone" placeholder="+39...">
+  </div>
+  <div class="col-12">
+    <button class="btn btn-primary">Richiedi link</button>
+  </div>
+</form>
+{% endblock %}
