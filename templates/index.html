@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="text-center mb-4">
+  <img src="/static/logo.svg" alt="{{ brand }}" style="max-width:220px; height:auto;">
+</div>
+
+<h2 class="text-center mb-3">Calendario settimana</h2>
+<p class="text-center text-muted">{{ start.strftime('%d/%m/%Y') }} — {{ end.strftime('%d/%m/%Y') }}</p>
+
+<div class="row justify-content-center">
+  {% for day, items in days.items() %}
+    <div class="col-md-4 col-lg-3 mb-3">
+      <div class="border rounded p-2 h-100">
+        <h6 class="mb-2">{{ day.strftime('%A %d/%m') }}</h6>
+        {% if not items %}
+          <div class="text-muted">Nessuna lezione</div>
+        {% else %}
+          <ul class="list-unstyled small mb-0">
+            {% for s in items %}
+              <li class="mb-1">
+                <a href="{{ url_for('class_detail', class_id=s.id) }}">
+                  <strong>{{ s.start_time.strftime('%H:%M') }}</strong> — {{ s.title }}
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </div>
+    </div>
+  {% endfor %}
+</div>
+{% endblock %}
