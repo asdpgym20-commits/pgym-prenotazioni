@@ -1,1 +1,5 @@
-
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="160">
+  <rect width="100%" height="100%" fill="#111"/>
+  <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle"
+        font-family="Arial, Helvetica, sans-serif" font-size="48" fill="#C3FF00">PGYM 2.0</text>
+</svg>
